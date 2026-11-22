@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة شَـغَـف | الأنشطة والتطوع المدرسي</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Tajawal & Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+        }
+        .sky-gradient {
+            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+        }
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.4)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 25px rgba(2, 132, 199, 0.6)); }
+        }
+        .logo-animate {
+            animation: pulseGlow 2.2s infinite ease-in-out;
+        }
+        .fade-in {
+            animation: fadeIn 0.35s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- ================= 1. SPLASH SCREEN (شاشة الشعار) ================= -->
+    <div id="splash-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-white via-sky-50 to-blue-100 transition-opacity duration-500">
+        <div class="logo-animate mb-6 bg-white p-6 rounded-3xl shadow-xl border border-sky-100">
+            <svg width="110" height="110" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="skyGrad" x1="10" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#0284C7"/>
+                        <stop offset="100%" stop-color="#38BDF8"/>
+                    </linearGradient>
+                    <linearGradient id="goldGrad" x1="50" y1="15" x2="70" y2="55" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#F59E0B"/>
+                        <stop offset="100%" stop-color="#FBBF24"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="60" cy="60" r="54" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="2"/>
+                <path d="M60 18C60 18 75 34 75 47C75 55.2843 68.2843 62 60 62C51.7157 62 45 55.2843 45 47C45 40 50 32 54 28C53 33 56 36 58 36C56 30 60 18 60 18Z" fill="url(#goldGrad)"/>
+                <path d="M26 68C26 64 38 62 58 70V94C38 86 26 88 26 92V68Z" fill="url(#skyGrad)"/>
+                <path d="M94 68C94 64 82 62 62 70V94C82 86 94 88 94 92V68Z" fill="#0369A1"/>
+                <path d="M84 26L86 31L91 33L86 35L84 40L82 35L77 33L82 31L84 26Z" fill="#38BDF8"/>
+            </svg>
+        </div>
+        <h1 class="text-4xl font-extrabold text-sky-900 tracking-wide mb-2">منصة شَـغَـف</h1>
+        <p class="text-sky-600 font-medium text-lg mb-6">نُطلق طاقات الطالبات ونصنع الأثر المدرسي</p>
+        <div class="w-48 h-1.5 bg-sky-200 rounded-full overflow-hidden mb-6">
+            <div id="splash-progress" class="h-full bg-sky-600 rounded-full transition-all duration-1000" style="width: 35%;"></div>
+        </div>
+        <button onclick="skipSplash()" class="px-5 py-2 rounded-full bg-white/80 text-sky-700 text-xs font-bold border border-sky-200 hover:bg-white shadow-sm">
+            دخول مباشر للمنصة ←
+        </button>
+    </div>
+
+    <!-- ================= 2. AUTH SCREEN (تسجيل الدخول / حساب جديد) ================= -->
+    <div id="auth-screen" class="hidden min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-sky-50 via-white to-blue-50">
+        <div class="w-full max-w-md glass-card rounded-3xl shadow-xl p-8 fade-in border border-sky-100">
+            <div class="text-center mb-6">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-sky-50 border border-sky-100 mb-3 shadow-sm">
+                    <svg width="42" height="42" viewBox="0 0 120 120" fill="none">
+                        <path d="M60 18C60 18 75 34 75 47C75 55.2843 68.2843 62 60 62C51.7157 62 45 55.2843 45 47C45 40 50 32 54 28C53 33 56 36 58 36C56 30 60 18 60 18Z" fill="#F59E0B"/>
+                        <path d="M26 68C26 64 38 62 58 70V94C38 86 26 88 26 92V68Z" fill="#0284C7"/>
+                        <path d="M94 68C94 64 82 62 62 70V94C82 86 94 88 94 92V68Z" fill="#0369A1"/>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-extrabold text-slate-800">أهلاً بكِ في شَـغَـف</h2>
+                <p class="text-sm text-slate-500 mt-1">بوابة الأنشطة والمسابقات والتطوع المدرسي</p>
+            </div>
+
+            <!-- التفرقة بين تسجيل الدخول وإنشاء حساب جديد -->
+            <div class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-2xl mb-6">
+                <button type="button" id="tab-login" onclick="switchAuthMode('login')" class="py-2.5 text-sm font-bold rounded-xl bg-white text-sky-700 shadow-sm transition-all">
+                    تسجيل الدخول
+                </button>
+                <button type="button" id="tab-register" onclick="switchAuthMode('register')" class="py-2.5 text-sm font-bold rounded-xl text-slate-500 hover:text-slate-700 transition-all">
+                    إنشاء حساب جديد
+                </button>
+            </div>
+
+            <!-- اختيار نوع الحساب: طالبة أو معلمة -->
+            <div class="mb-5">
+                <label class="block text-xs font-bold text-slate-500 mb-2">اختاري نوع الحساب:</label>
+                <div class="grid grid-cols-2 gap-3">
+                    <button type="button" id="role-student" onclick="switchRole('student')" class="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border-2 border-sky-500 bg-sky-50 text-sky-800 font-bold text-sm transition-all">
+                        <span>🎓 حساب طالبة</span>
+                    </button>
+                    <button type="button" id="role-teacher" onclick="switchRole('teacher')" class="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-600 font-bold text-sm hover:border-sky-200 transition-all">
+                        <span>👩‍🏫 حساب معلمة</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="auth-alert" class="hidden mb-4 p-3 rounded-xl text-xs font-bold text-center"></div>
+
+            <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                <!-- خانات إنشاء حساب جديد (فارغة وديناميكية بالكامل) -->
+                <div id="register-fields" class="hidden space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">الاسم الكامل</label>
+                        <input type="text" id="input-fullname" placeholder="أدخلي اسمكِ الكامل هنا" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-500 outline-none text-sm bg-white">
+                    </div>
+
+                    <!-- خانات الطالبة: الصف والفصل -->
+                    <div id="student-extra-fields" class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">الصف الدراسي</label>
+                            <select id="input-grade" class="w-full px-3 py-3 rounded-xl border border-slate-200 focus:border-sky-500 outline-none text-sm bg-white">
+                                <option value="أول ثانوي">أول ثانوي</option>
+                                <option value="ثاني ثانوي">ثاني ثانوي</option>
+                                <option value="ثالث ثانوي">ثالث ثانوي</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">الفصل</label>
+                            <input type="text" id="input-section" placeholder="مثال: ٣/١" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-500 outline-none text-sm bg-white">
+                        </div>
+                    </div>
+
+                    <!-- خانة المعلمة: المادة أو القسم -->
+                    <div id="teacher-extra-fields" class="hidden">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">المادة / التخصص</label>
+                        <input type="text" id="input-subject" placeholder="مثال: رائدة نشاط / معلمة" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-500 outline-none text-sm bg-white">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">اسم المستخدم</label>
+                    <input type="text" id="input-username" required placeholder="أدخلي اسم المستخدم" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-500 outline-none text-sm bg-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">كلمة المرور</label>
+                    <input type="password" id="input-password" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-500 outline-none text-sm bg-white">
+                </div>
+
+                <button type="submit" id="auth-submit-btn" class="w-full py-3.5 rounded-xl sky-gradient text-white font-bold text-sm shadow-lg shadow-sky-200 hover:opacity-95 transition-all">
+                    دخول إلى المنصة ←
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= 3. MAIN APP DASHBOARD (الصفحة الرئيسية وكل الخانات) ================= -->
+    <div id="app-screen" class="hidden flex-1 flex flex-col">
+        
+        <!-- الشريط العلوي -->
+        <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-sky-100 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center">
+                        <svg width="26" height="26" viewBox="0 0 120 120" fill="none">
+                            <path d="M60 18C60 18 75 34 75 47C75 55.2843 68.2843 62 60 62C51.7157 62 45 55.2843 45 47C45 40 50 32 54 28C53 33 56 36 58 36C56 30 60 18 60 18Z" fill="#F59E0B"/>
+                            <path d="M26 68C26 64 38 62 58 70V94C38 86 26 88 26 92V68Z" fill="#0284C7"/>
+                            <path d="M94 68C94 64 82 62 62 70V94C82 86 94 88 94 92V68Z" fill="#0369A1"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-extrabold text-sky-900 leading-none">شَـغَـف</h1>
+                        <span class="text-[11px] font-medium text-sky-600">الأنشطة والتطوع المدرسي</span>
+                    </div>
+                </div>
+
+                <!-- قائمة التنقل الرئيسية -->
+                <nav class="hidden md:flex items-center gap-1">
+                    <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-sky-700 bg-sky-50 transition-all">الرئيسية</button>
+                    <button onclick="navigateTo('activities')" id="nav-activities" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all">المسابقات والفرص</button>
+                    <button onclick="navigateTo('stats')" id="nav-stats" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all">الإحصائيات والتميز</button>
+                    <button onclick="navigateTo('manage')" id="nav-manage" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all">مشاركاتي / التوثيق</button>
+                    <button onclick="navigateTo('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all">أصحاب الفكرة</button>
+                </nav>
+
+                <!-- بيانات المستخدم المسجل وخروج -->
+                <div class="flex items-center gap-3">
+                    <div class="text-left">
+                        <p id="header-user-name" class="text-xs font-extrabold text-slate-800"></p>
+                        <p id="header-user-badge" class="text-[11px] font-bold text-sky-600"></p>
+                    </div>
+                    <button onclick="logout()" title="تسجيل الخروج" class="px-3 py-2 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100 text-xs font-bold transition-all">
+                        خروج
+                    </button>
+                </div>
+            </div>
+
+            <!-- شريط التنقل للجوال -->
+            <div class="md:hidden flex overflow-x-auto border-t border-slate-100 px-2 py-2 gap-1.5 bg-white">
+                <button onclick="navigateTo('home')" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-50 text-sky-700">الرئيسية</button>
+                <button onclick="navigateTo('activities')" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600">المسابقات</button>
+                <button onclick="navigateTo('stats')" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600">الإحصائيات</button>
+                <button onclick="navigateTo('manage')" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600">التوثيق والمشاركات</button>
+                <button onclick="navigateTo('about')" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600">أصحاب الفكرة</button>
+            </div>
+        </header>
+
+        <!-- محتوى الصفحات -->
+        <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+            <!-- ==================== خانة 1: الصفحة الرئيسية ==================== -->
+            <section id="page-home" class="page-section space-y-6 fade-in">
+                <div class="relative overflow-hidden rounded-3xl sky-gradient p-6 sm:p-10 text-white shadow-lg shadow-sky-100">
+                    <div class="relative z-10 max-w-2xl">
+                        <span class="inline-block px-3 py-1 rounded-full bg-white/20 text-xs font-bold mb-3">
+                            ✨ البيئة المدرسية التفاعلية
+                        </span>
+                        <h2 id="welcome-banner-title" class="text-2xl sm:text-3xl font-extrabold mb-2">أهلاً بكِ في منصة شَـغَـف</h2>
+                        <p class="text-sky-50 text-sm sm:text-base leading-relaxed mb-6">
+                            اكتشفي أحدث المسابقات المدرسية، بادري بالمساعدة في تنظيم الفعاليات، ووثّقي ساعاتكِ التطوعية ونقاط تميزكِ بكل سهولة.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="navigateTo('activities')" class="px-5 py-2.5 rounded-xl bg-white text-sky-700 font-bold text-sm shadow-md hover:bg-sky-50 transition-all">
+                                استعراض المسابقات المتاحة
+                            </button>
+                            <button id="hero-teacher-btn" onclick="openNewActivityModal()" class="hidden px-5 py-2.5 rounded-xl bg-sky-900/40 border border-white/30 text-white font-bold text-sm hover:bg-sky-900/60 transition-all">
+                                + نشر مسابقة أو طلب مساعدة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بطاقات الإحصائيات السريعة -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+                        <p class="text-xs font-bold text-slate-400">الفرص المتاحة حالياً</p>
+                        <p id="kpi-active-count" class="text-2xl font-extrabold text-sky-700 mt-1">0</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+                        <p class="text-xs font-bold text-slate-400">إجمالي المشاركات</p>
+                        <p id="kpi-total-participations" class="text-2xl font-extrabold text-emerald-600 mt-1">0</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+                        <p id="kpi-personal-label" class="text-xs font-bold text-slate-400">نقاط التميز</p>
+                        <p id="kpi-personal-value" class="text-2xl font-extrabold text-amber-500 mt-1">0</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+                        <p class="text-xs font-bold text-slate-400">أنشطة منتهية</p>
+                        <p id="kpi-ended-count" class="text-2xl font-extrabold text-slate-600 mt-1">0</p>
+                    </div>
+                </div>
+
+                <!-- أحدث الفرص المتاحة -->
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-extrabold text-slate-800">🟢 أحدث الفرص والمسابقات المتاحة الآن</h3>
+                        <button onclick="navigateTo('activities')" class="text-xs font-bold text-sky-600 hover:underline">عرض الكل ←</button>
+                    </div>
+                    <div id="home-active-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+                </div>
+            </section>
+
+            <!-- ==================== خانة 2: المسابقات وطلبات المساعدة ==================== -->
+            <section id="page-activities" class="page-section hidden space-y-6 fade-in">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+                    <div>
+                        <h2 class="text-xl font-extrabold text-slate-800">المسابقات وطلبات المساعدة</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">التمييز بين الفرص الجديدة المتاحة والفعاليات القديمة المنتهية</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <div class="flex bg-slate-100 p-1 rounded-xl">
+                            <button onclick="filterActivities('all')" id="filter-all" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-sky-700 shadow-sm">الكل</button>
+                            <button onclick="filterActivities('active')" id="filter-active" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600">جديدة / متاحة</button>
+                            <button onclick="filterActivities('ended')" id="filter-ended" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600">قديمة / منتهية</button>
+                        </div>
+                        <button id="btn-add-activity" onclick="openNewActivityModal()" class="hidden px-4 py-2 rounded-xl sky-gradient text-white font-bold text-xs shadow-md">
+                            + إضافة مسابقة / طلب مساعدة
+                        </button>
+                    </div>
+                </div>
+
+                <div id="activities-list-gri
